@@ -6,7 +6,8 @@ import Login from './pages/login/Login';
 import Main from './pages/main/Main';
 import Signup from './pages/signup/Signup';
 import ForgotPassword from './pages/login/forgotpassword/Forgotpassword';
-import Footer from './pages/component/Footer';
+import Footer from './components/Footer';
+import Chatting from './components/Chatting';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -30,8 +31,10 @@ function App() {
       <Route path="/" element={<Main />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
+      <Route path="/chatting" element={<Chatting />} />
+      
     </Routes>
-    <Footer isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+    {/* <Footer isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} /> */}
   </Router>
   );
 }
