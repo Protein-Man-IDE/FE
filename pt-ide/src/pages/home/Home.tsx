@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 
   return (
     <main>
-      <div className="relative h-[100vh] items-center justify-center bg-white dark:bg-black">
+      <div className="h-[100vh] items-center justify-center bg-white dark:bg-black">
         <div className="absolute inset-0 overflow-hidden">
           <div className="jumbo absolute -inset-[10px] opacity-50" />
         </div>
