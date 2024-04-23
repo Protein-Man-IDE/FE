@@ -8,6 +8,7 @@ import Signup from './pages/signup/Signup';
 import ForgotPassword from './pages/login/forgotpassword/Forgotpassword';
 import Footer from './components/Footer';
 import Chatting from './components/Chatting';
+import Home from './pages/home/Home';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -30,6 +31,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Main />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/chatting" element={<Chatting />} />
       
