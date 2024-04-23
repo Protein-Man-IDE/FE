@@ -1,17 +1,134 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
+/* Base styles */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Inter',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Code styling */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Content styling */
+.content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content h2 {
+  color: #fff;
+  font-size: 1.7em;
+  position: absolute;
+}
+
+.content h2:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 2px #8338ec;
+}
+
+.content h2:nth-child(2) {
+  color: #c19bf5;
+  animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate {
+  0%, 100% {
+    clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes jumbo {
+  from {
+      background-position: 50% 50%, 50% 50%;
+  }
+  to {
+      background-position: 350% 50%, 350% 50%;
+  }
+}
+
+
+/* Full-screen background styles */
+.jumbo {
+  
+  --stripes: repeating-linear-gradient(100deg, #fff 0%, #fff 7%, transparent 10%, transparent 12%, #fff 16%);
+  --stripesDark: repeating-linear-gradient(100deg, #000 0%, #000 7%, transparent 10%, transparent 12%, #000 16%);
+  --rainbow: repeating-linear-gradient(100deg, #60a5fa 10%, #e879f9 15%, #60a5fa 20%, #5eead4 25%, #60a5fa 30%);
+  background-image: var(--stripes), var(--rainbow);
+  background-size: 300%, 200%;
+  background-position: 50% 50%;
+  filter: blur(10px) invert(100%);
+  mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+  pointer-events: none;
+}
+
+.jumbo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--stripes), var(--rainbow);
+  background-size: 200%, 100%;
+  animation: jumbo 60s linear infinite;
+  background-attachment: fixed;
+  mix-blend-mode: difference;
+}
+
+.dark .jumbo {
+  background-image: var(--stripesDark), var(--rainbow);
+  filter: blur(10px) opacity(50%) saturate(200%);
+}
+
+.dark .jumbo::after {
+  background-image: var(--stripesDark), var(--rainbow);
+}
+
+
+/* 보더색상 */
+.rainbow-border {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px; /* 필요에 따라 조절 */
+}
+
+.rainbow-border::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #d15a6f, #be56a6, #734b7d, #c790b6);
+  animation: rotate 12s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 로그인 폼 스타일 조정 */
+.login-form {
+  position: relative;
+  z-index: 1; /* 이렇게 설정하여 텍스트와 입력 필드가 애니메이션을 가리지 않도록 함 */
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
 }
