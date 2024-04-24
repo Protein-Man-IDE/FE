@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, ChangeEvent, FormEvent  } from 'react';
+import axios,{AxiosError } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
+interface FormValue {
+  id: string;
+  password: string;
+}
+
+interface ErrorResponse {
+  message: string;
+  errors?: string[];
+}
+
 const Login = () => {
+
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+
+  const [formData, setFormData] = useState<FormValue>({
     id: '',
     password: '',
   });
-  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleInputChange = (e) => {
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  const [token, setToken] = useState(null);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -18,28 +33,43 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // 폼 기본 제출 동작 방지
     try {
-      const response = await axios.post('https://kcd7f2e0bc7b8a.user-app.krampoline.com/user/login', {
+      const response = await axios.post('https://ke6f20a9f2b88a.user-app.krampoline.com/user/login', {
         username: formData.id,
         password: formData.password
-      });
-
+      },
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'}}
+        );
+      const token = response.headers['autohorization'];
+      if(token){
+        localStorage.setItem('token', token); 
+        navigate('/main');
+      }
+      else {
+        // 토큰이 없는 경우, 오류 메시지 설정 
+        setErrorMessage(response.data.message || '로그인 처리 중 문제가 발생했습니다.');
+      }
+  
       if (response.data.success) {
-        localStorage.setItem('token', response.headers['Authorization']); // 토큰 저장
+        localStorage.setItem('token', response.headers['authorization']); // 토큰 저장
         navigate('/main'); // 성공시 메인 페이지로 이동
       } else {
         setErrorMessage(response.data.message || '로그인 처리 중 문제가 발생했습니다.');
       }
     } catch (error) {
-      if (error.response) {
-        // 서버에서 응답을 받았으나 에러가 발생한 경우
-        const errors = error.response.data.errors || ['서버 에러 발생'];
-        setErrorMessage(error.response.data.message + ' ' + errors.join(', '));
+      const axiosError = error as AxiosError<ErrorResponse>;
+      if (axiosError.response) {
+        setErrorMessage(
+          axiosError.response.data.message + ' ' + (axiosError.response.data.errors?.join(', ') || '서버 에러 발생')
+        );
+      } else if (axiosError.request) {
+        setErrorMessage('서버로부터 응답을 받을 수 없습니다.');
       } else {
-        // 요청이 이루어지지 않은 경우
-        setErrorMessage('네트워크 오류가 발생했습니다.');
+        setErrorMessage(axiosError.message);
       }
     }
   };
