@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SqlQueryEditor from '../../components/CodeEditor';
 import IdeNavbar from '../../components/IdeNavbar';
 import FileExplorer from '../../components/FileExplorer';
-import axios from 'axios';
+
 
 const Main: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
