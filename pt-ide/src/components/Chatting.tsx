@@ -1,12 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import ChatHeader from "./ChatHeader";
-import CreateRoomModal from "./CreateRoomModal";
+
 
 const Chatting = () =>{
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+    console.log("Modal opened");
+  }
+  const handleCloseModal = () => setModalOpen(false);
+
   return(
     <div>
       <ChatHeader/>
-      
     </div>
   )
 }
