@@ -8,7 +8,7 @@ const posts = [
 ];
 
 const Home: React.FC = () => {
-  
+
   const [currentPost, setCurrentPost] = useState<string>(posts[0]);
   const [opacity, setOpacity] = useState(1);
 
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
   return (
     <main>
       <div className="h-[100vh] items-center justify-center bg-white dark:bg-black">
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="inset-0 overflow-hidden">
           <div className="jumbo absolute -inset-[10px] opacity-50" />
         </div>
         <div className="mt-40 flex justify-center">
@@ -47,10 +47,10 @@ const Home: React.FC = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <button  
-          className="py-2 px-4 border border-stone-200 rounded-full drop-shadow-sm text-sm text-stone-800 dark:text-white bg-white/40 dark:bg-black/40 backdrop-blur-lg hover:border-stone-300 transition-colors dark:border-stone-500 dark:hover:border-stone-400">
+          <button
+            className="py-2 px-4 border border-stone-200 rounded-full drop-shadow-sm text-sm text-stone-800 dark:text-white bg-white/40 dark:bg-black/40 backdrop-blur-lg hover:border-stone-300 transition-colors dark:border-stone-500 dark:hover:border-stone-400">
             <Link to='/login'>Sign In</Link></button>
-          <button  className="ml-4 py-2 px-4 border border-stone-200 rounded-full drop-shadow-sm text-sm text-stone-800 dark:text-white bg-white/40 dark:bg-black/40 backdrop-blur-lg hover:border-stone-300 transition-colors">
+          <button className="ml-4 py-2 px-4 border border-stone-200 rounded-full drop-shadow-sm text-sm text-stone-800 dark:text-white bg-white/40 dark:bg-black/40 backdrop-blur-lg hover:border-stone-300 transition-colors">
             <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 font-bold"><Link to='/signup'>Sign Up for Free</Link></p>
           </button>
         </div>

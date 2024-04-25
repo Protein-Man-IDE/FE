@@ -3,7 +3,6 @@ import SqlQueryEditor from '../../components/CodeEditor';
 import IdeNavbar from '../../components/IdeNavbar';
 import FileExplorer from '../../components/FileExplorer';
 
-
 const Main: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [explorerWidth, setExplorerWidth] = useState(200); // 파일 탐색기의 초기 너비 설정
@@ -23,9 +22,8 @@ const Main: React.FC = () => {
     <div className="flex flex-col h-screen">
       <IdeNavbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <div className="flex flex-1 overflow-hidden">
-        <FileExplorer width={explorerWidth} setWidth={handleResize} />
-        <div style={{ width: `${editorWidth}px` }} className="p-4 overflow-auto">
-          <h1 className="text-2xl font-bold mb-4">Main Page</h1>
+        <FileExplorer width={explorerWidth} setWidth={handleResize} isDarkMode={isDarkMode} /> {/* isDarkMode prop 전달 */}
+        <div style={{ width: `${editorWidth}px` }} className="overflow-auto">
           <SqlQueryEditor isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
         </div>
       </div>

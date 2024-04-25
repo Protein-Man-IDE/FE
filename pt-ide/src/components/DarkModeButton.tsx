@@ -1,6 +1,12 @@
 import React from 'react';
 
-const DarkModeButton = ({ isDarkMode, setIsDarkMode }) => {
+// Props 타입 정의
+interface DarkModeButtonProps {
+    isDarkMode: boolean;
+    setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const DarkModeButton: React.FC<DarkModeButtonProps> = ({ isDarkMode, setIsDarkMode }) => {
     const toggleButton = () => {
         setIsDarkMode(!isDarkMode); // Toggle the dark mode state
     };

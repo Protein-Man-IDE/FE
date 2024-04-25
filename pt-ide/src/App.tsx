@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -27,17 +27,17 @@ function App() {
 
   return (
     <Router>
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/main" element={<Main />} />
-      <Route path="/forgotpassword" element={<ForgotPassword />} />
-      <Route path="/chatting" element={<Chatting />} />
-      
-    </Routes>
-    {/* <Footer isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} /> */}
-  </Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/main" element={<Main />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/chatting" element={<Chatting />} />
+
+      </Routes>
+      <Footer isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+    </Router>
   );
 }
 
