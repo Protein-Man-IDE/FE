@@ -1,8 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import {ChatRoom} from "./ChatRoom";
 
-const ChatHeader = () => {
 
+interface ChatHeaderProps {
+  onRoomAdded: (newRoom: ChatRoom) => void;
+}
+
+const ChatHeader: React.FC<ChatHeaderProps> = ({ onRoomAdded }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [roomName, setRoomName] = useState('');
 
@@ -11,23 +16,30 @@ const ChatHeader = () => {
 
   const handleRoomNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setRoomName(e.target.value);
 
-
   const handleCreateRoom = async (e: React.FormEvent) => {
-
     e.preventDefault();
-
     if (roomName.trim()) {
       try {
-        const response = await axios.post('https://ke6f20a9f2b88a.user-app.krampoline.com/chat/rooms', { roomName: roomName },
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error("No token found");
+          return;
+        }
+        const response = await axios.post<{success: boolean; data: ChatRoom}>('http://localhost:8080/chat/rooms', { roomName },
         {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': token
           }
         });
-        console.log(response.data);
-        handleCloseModal(); // 성공 후 모달 닫기
+        if (response.data.success) {
+          onRoomAdded(response.data.data);
+          handleCloseModal();
+        } else {
+          console.error('Failed to create room:', response.data);
+        }
       } catch (error) {
-        console.error(error);
+        console.error('Error creating room:', error);
       }
     }
   };

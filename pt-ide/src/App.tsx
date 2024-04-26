@@ -9,8 +9,9 @@ import ForgotPassword from './pages/login/forgotpassword/Forgotpassword';
 import Footer from './components/Footer';
 import Chatting from './components/Chatting';
 import Home from './pages/home/Home';
+// import ChattingRoom from './components/ChattingRoom';
 
-function App() {
+const App:React.FC=()=> {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/main" element={<Main />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/chatting" element={<Chatting />} />
+        {/* <Route path="/chat/:roomNo" element={<ChattingRoom />} /> */}
 
       </Routes>
       <Footer isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
